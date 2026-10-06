@@ -297,7 +297,8 @@ Groups that come from "64D7" = {"64.96.7.g.1", "64.96.7.g.2", "64.96.7.h.1", "64
 
 //**************************************************************************************************************************************
 
-load "LMFDB data on genus 2-11.m";
+load "LMFDB Data/LMFDB data on genus 2-11.m";
+data211 := data;
 AttachSpec("2025-12-14-archive-1/Zywina_number fields/Modular-main (2)/Modular-main/Modular.spec"); //Please change it according to local directory
 
 remaining:={};
