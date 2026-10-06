@@ -63,13 +63,13 @@ end for;
 #l; //
 
 
-#EllipticCurve(Curve(Reduction(l[1],97))); //80
-#EllipticCurve(Curve(Reduction(l[3],83))); //90
+assert #EllipticCurve(Curve(Reduction(l[1],97))) eq 80;
+assert #EllipticCurve(Curve(Reduction(l[3],83))) eq 90;
 
 Qx<x> := PolynomialRing(Rationals());
 E := EllipticCurve(x^3+x^2+x+1);
-#EllipticCurve(Curve(Reduction(E,83))); //78
-#EllipticCurve(Curve(Reduction(E,97))); //100
+assert #EllipticCurve(Curve(Reduction(E,83))) eq 78;
+assert #EllipticCurve(Curve(Reduction(E,97))) eq 100;
 
 C1 := l[2];
 
