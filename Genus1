@@ -41,6 +41,8 @@ for r in cp_data_new do
     
 end for;
 
+computed_bounds:=AssociativeArray();
+
 keys:=[k: k in Keys(CPgenus1list)];
 level:=[CPgenus1list[k]`N:k in keys];
 ParallelSort(~level,~keys);
@@ -76,8 +78,7 @@ SL2:=SL(2,Integers(CPgenus1list[k]`N));
     if ((CPgenus1list[k]`N) mod 2 eq 0 ) and ((CPgenus1list[k]`N) mod 4 ne 0) then
         b:=2*b;
     end if;
-    k;b;
-    print "...............";
+    computed_bounds[k]:=b;
 end for;   
 
 /*7C1
@@ -239,6 +240,67 @@ end for;
 49A1
 1
 ...............*/
+// Machine-check the formerly printed expected bounds.
+expected_bounds:=AssociativeArray();
+expected_bounds["7C1"] := 1;
+expected_bounds["7A1"] := 1;
+expected_bounds["7B1"] := 1;
+expected_bounds["8H1"] := 2;
+expected_bounds["8I1"] := 4;
+expected_bounds["8A1"] := 4;
+expected_bounds["8G1"] := 4;
+expected_bounds["8K1"] := 4;
+expected_bounds["8C1"] := 2;
+expected_bounds["8D1"] := 2;
+expected_bounds["8F1"] := 4;
+expected_bounds["8B1"] := 4;
+expected_bounds["8E1"] := 2;
+expected_bounds["8J1"] := 2;
+expected_bounds["9D1"] := 3;
+expected_bounds["9F1"] := 3;
+expected_bounds["9H1"] := 3;
+expected_bounds["9C1"] := 3;
+expected_bounds["9A1"] := 3;
+expected_bounds["9B1"] := 1;
+expected_bounds["9G1"] := 3;
+expected_bounds["9E1"] := 3;
+expected_bounds["11B1"] := 1;
+expected_bounds["11A1"] := 1;
+expected_bounds["11C1"] := 1;
+expected_bounds["11D1"] := 1;
+expected_bounds["16B1"] := 4;
+expected_bounds["16M1"] := 4;
+expected_bounds["16I1"] := 2;
+expected_bounds["16F1"] := 4;
+expected_bounds["16A1"] := 4;
+expected_bounds["16J1"] := 2;
+expected_bounds["16C1"] := 2;
+expected_bounds["16H1"] := 4;
+expected_bounds["16D1"] := 2;
+expected_bounds["16K1"] := 2;
+expected_bounds["16E1"] := 4;
+expected_bounds["16L1"] := 2;
+expected_bounds["16G1"] := 2;
+expected_bounds["17B1"] := 1;
+expected_bounds["17A1"] := 1;
+expected_bounds["17C1"] := 1;
+expected_bounds["19A1"] := 1;
+expected_bounds["19B1"] := 1;
+expected_bounds["27C1"] := 3;
+expected_bounds["27A1"] := 3;
+expected_bounds["27B1"] := 3;
+expected_bounds["32C1"] := 2;
+expected_bounds["32D1"] := 2;
+expected_bounds["32E1"] := 4;
+expected_bounds["32B1"] := 4;
+expected_bounds["32A1"] := 4;
+expected_bounds["49A1"] := 1;
+assert #Keys(computed_bounds) eq #Keys(expected_bounds);
+for k in Keys(expected_bounds) do
+    assert IsDefined(computed_bounds,k);
+    assert computed_bounds[k] eq expected_bounds[k];
+end for;
+
 
 //******************************************************************
 load "LMFDB Data/Genus 1 data_LMFDB.m"; 
