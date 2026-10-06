@@ -44,7 +44,10 @@ FILES += sorted((ROOT / "Not positive rank").glob("*.m"))
 DANGEROUS_CODE = [
     re.compile(r"^#l;\s*$"),
     re.compile(r"^#EllipticCurve\s*\("),
-    re.compile(r"^Rank\s*\(\s*E\s*\)\s*;\s*$"),
+    re.compile(r"^#Points\s*\("),
+    re.compile(r"^#G;\s*$"),
+    re.compile(r"^#(?:remaining|SetHypCand|ptlessgenus0quo|genus0);\s*$"),
+    re.compile(r"^Rank\s*\([^;]+\)\s*;\s*$"),
     re.compile(r"^Genus\s*\(\s*CG\s*\)\s*;\s*$"),
     re.compile(r"^IsConjugate\s*\(\s*GL2\s*,\s*G\s*,\s*Gt\s*\)\s*;\s*$"),
     re.compile(r"^IsLocallySolv(?:able|uble)\s*\("),
@@ -136,7 +139,10 @@ for path in FILES:
 if problems:
     print("Unchecked/manual expected-output statements remain:", file=sys.stderr)
     for path, line_no, reason, line in problems:
-        rel = path.relative_to(ROOT) if path.is_relative_to(ROOT) else path
+        try:
+            rel = path.relative_to(ROOT)
+        except ValueError:
+            rel = path
         loc = f"{rel}:{line_no}" if line_no else str(rel)
         print(f"  {loc}: {reason}", file=sys.stderr)
         if line:
