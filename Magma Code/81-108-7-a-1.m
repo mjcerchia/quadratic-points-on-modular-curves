@@ -26,4 +26,4 @@ G:= AutomorphismGroup(C);
 Pts:=PointSearch(C,10000);
 CG,prj:=CurveQuotient(G);
 E:=EllipticCurve(CG,prj(Pts[1]));
-Rank(E); //1 
+assert Rank(E) eq 1; 
