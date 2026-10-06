@@ -148,5 +148,8 @@ P<x> := PolynomialRing(Rationals());
 f := -(2209/1595103161087639665800000000*x^4  + 369664/14115049*x^2 + 7933071522063974400000000/169);
 g:= P!(- 1216/3757*x);
 H := HyperellipticCurve(f,g);
-SimplifiedModel(H); // pointless
-Jacobian(GenusOneModel(H)); //isomorphic to 256.2.a.b
+SH := SimplifiedModel(H);
+assert not IsLocallySoluble(GenusOneModel(SH));
+J := Jacobian(GenusOneModel(H));
+Eref := EllipticCurve([0,0,0,-2,0]); // LMFDB isogeny class 256.b, modular form 256.2.a.b
+assert IsIsogenous(J,Eref);
