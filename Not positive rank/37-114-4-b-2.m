@@ -45,7 +45,7 @@ end for;
 
 #l; //1
 
-#EllipticCurve(Curve(l[1])); //6
+assert #EllipticCurve(Curve(l[1])) eq 6;
 
 E := EllipticCurve([0,0,1,-1,0]);
 #EllipticCurve(Curve(Reduction(E,5))); //8
