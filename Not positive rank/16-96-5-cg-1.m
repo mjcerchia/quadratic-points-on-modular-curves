@@ -140,7 +140,9 @@ g:= P!(- 8012408107/20381746235465097745920*x^2+ 876929837614050/10591640456663*
 H := HyperellipticCurve(f,g);
 SH:=SimplifiedModel(H);
 assert not IsLocallySolvable(SH,2);
-Jacobian(GenusOneModel(H)); // isomorphic to 256.2.a.b
+J := Jacobian(GenusOneModel(H));
+Eref := EllipticCurve([0,0,0,-2,0]); // LMFDB isogeny class 256.b, modular form 256.2.a.b
+assert IsIsogenous(J,Eref);
 
 C1:=l[2];
 
@@ -195,7 +197,9 @@ g:= P!(8012408107/20381746235465097745920*x^2+ 876929837614050/10591640456663*x-
 H := HyperellipticCurve(f,g);
 SH:=SimplifiedModel(H);
 assert not IsLocallySolvable(SH,2);
-Jacobian(GenusOneModel(H)); // isomorphic to 256.2.a.b
+J := Jacobian(GenusOneModel(H));
+Eref := EllipticCurve([0,0,0,-2,0]); // LMFDB isogeny class 256.b, modular form 256.2.a.b
+assert IsIsogenous(J,Eref);
 
 
 
