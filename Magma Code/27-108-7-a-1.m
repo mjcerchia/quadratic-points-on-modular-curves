@@ -23,4 +23,4 @@ P<[x]>:=ProjectiveSpace(Rationals(),11);
 //We can't immediately find a point, so we intersect with hyperplanes.
 pt := C1!Points(C1 meet Scheme(AmbientSpace(C1),x[3]))[1];
 E := EllipticCurve(C1,pt);
-Rank(E); // 1
+assert Rank(E) eq 1;
