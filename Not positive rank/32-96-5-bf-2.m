@@ -134,7 +134,7 @@ P<x> := PolynomialRing(Rationals());
  f := -(32*x^4+8*x^2+1);
  
 H := HyperellipticCurve(f);
-HasPointsEverywhereLocally(f,2); // false
+assert not HasPointsEverywhereLocally(f,2);
 
 
     
