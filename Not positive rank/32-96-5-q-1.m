@@ -40,8 +40,8 @@ end for;
 assert #l eq 1;
 
 
-#EllipticCurve(Curve(Reduction((l[1]),7))); //8
+assert #EllipticCurve(Curve(Reduction((l[1]),7))) eq 8;
 
 Qx<x> := PolynomialRing(Rationals());
 E := EllipticCurve(x^3+x^2+x+1);
-#EllipticCurve(Curve(Reduction(E,7))); //12
+assert #EllipticCurve(Curve(Reduction(E,7))) eq 12;
