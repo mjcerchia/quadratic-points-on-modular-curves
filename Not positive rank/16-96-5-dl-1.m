@@ -41,7 +41,7 @@ end for;
 #l;//2
 
 
-#EllipticCurve(Curve(l[1])); //6
+assert #EllipticCurve(Curve(l[1])) eq 6;
 #EllipticCurve(Curve(l[2])); //4
 
 Qx<x> := PolynomialRing(Rationals());
