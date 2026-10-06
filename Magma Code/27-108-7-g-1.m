@@ -50,7 +50,7 @@ C:=Curve(P,[x*y - x*z + w*t, 2*y*w - y*u - y*v + z*w - z*u, x*t + x*u + 2*x*v + 
 phi:=iso<C->C|[x,y,z,t/3,-w+v+t/3,-w+u+t/3,3*w],[x,y,z,t/3,-w+v+t/3,-w+u+t/3,3*w]>;
 AG:=AutomorphismGroup(C,[phi]);
 CG,prj:=CurveQuotient(AG);
-Genus(CG);// 1
+assert Genus(CG) eq 1;
 P<[x]>:=ProjectiveSpace(Rationals(),11);
 pt := CG!Points(CG meet Scheme(AmbientSpace(CG),x[5]))[1]; // has a point
 
