@@ -70,7 +70,9 @@ runs the **complete computational verification suite represented in this reposit
 - every `.m` file in `Magma Code/`;
 - every `.m` file in `Not positive rank/`.
 
-Each file is launched in a **fresh Magma process**, so a computation cannot accidentally inherit variables from a previous interactive session. The script records a separate log for each computation and a `summary.tsv` file, and it exits nonzero if any Magma process fails or if an assertion, syntax error, runtime error, user error, or internal error is detected.
+Before launching Magma, the runner also executes `audit_expected_outputs.py`. This static audit rejects the old manual-check style (for example `Rank(E); // 1`, `#l; // 3`, or a bare local-solubility/conjugacy computation whose expected answer appears only in a comment). Thus a successful run cannot silently rely on a referee comparing printed output by eye.
+
+Each verification file is then launched in a **fresh Magma process**, so a computation cannot accidentally inherit variables from a previous interactive session. The script records a separate log for every computation and a `summary.tsv` file, and it exits nonzero if the static audit fails, if any Magma process fails, or if an assertion, syntax error, runtime error, user error, or internal error is detected.
 
 The conventional dependency layout is
 
