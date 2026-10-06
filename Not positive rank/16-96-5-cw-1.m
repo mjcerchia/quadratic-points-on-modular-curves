@@ -41,8 +41,8 @@ end for;
 #l;//2
 
 assert #EllipticCurve(Curve(l[1])) eq 20;
-#EllipticCurve(Curve(l[2])); //14
+assert #EllipticCurve(Curve(l[2])) eq 14;
 
 Qx<x> := PolynomialRing(Rationals());
 E := EllipticCurve(x^3 - 2*x);
-#EllipticCurve(Curve(Reduction(E,13))); //18
+assert #EllipticCurve(Curve(Reduction(E,13))) eq 18;
