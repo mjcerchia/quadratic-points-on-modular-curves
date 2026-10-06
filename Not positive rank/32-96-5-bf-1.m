@@ -133,5 +133,5 @@ P<x> := PolynomialRing(Rationals());
 f := -(4096*x^4+128*x^2+6);
 g:=P!-4;
 H := HyperellipticCurve(f,g);
-HasPointsEverywhereLocally(f,2); // false
+assert not HasPointsEverywhereLocally(f,2);
 
