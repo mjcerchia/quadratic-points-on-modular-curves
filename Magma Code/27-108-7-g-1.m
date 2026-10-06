@@ -23,7 +23,6 @@ if Order(s1) eq 2 then
 
 AG := AutomorphismGroup(Cp,[s1]);
 CG,prj := CurveQuotient(AG);
-Genus(CG);
 if Genus(CG) eq 1 then
 
 quotient_counts join:= {#Points(CG)};
