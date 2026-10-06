@@ -35,6 +35,10 @@ end if;
 end if;
 
 end for;
-l; // It is easy to observe that all genus 1 quotients are pointless
+assert #l eq 3;
+// Certify pointlessness by a local obstruction for each genus-one quotient.
+for C1 in l do
+    assert not IsLocallySoluble(GenusOneModel(C1));
+end for;
 
 
