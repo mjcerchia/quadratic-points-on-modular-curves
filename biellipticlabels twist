@@ -231,7 +231,8 @@ for k in Keys(expectedBiellipticCand) do
 end for;
 
 
-load "LMFDB data on genus 2-11.m";
+load "LMFDB Data/LMFDB data on genus 2-11.m";
+data211 := data;
 
 // printing rank 0 candidates
 
