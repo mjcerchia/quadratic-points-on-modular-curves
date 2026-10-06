@@ -73,6 +73,14 @@ ASSIGNMENT_OR_ASSERT = re.compile(
 )
 
 
+# Comments attached to control-flow terminators are explanatory, not output
+# expectations (for example: `end for; // only level 64`).
+CONTROL_FLOW = re.compile(
+    r"^(?:end\s+(?:for|if|while|case)|else|repeat|until)\b",
+    re.IGNORECASE,
+)
+
+
 def active_lines(text: str):
     """Yield (line_no, line) outside /* ... */ block comments."""
     in_block = False
@@ -117,7 +125,12 @@ def suspicious(line: str) -> str | None:
                 return None
             return "bare verification expression"
 
-    if sep and code.endswith(";") and not ASSIGNMENT_OR_ASSERT.search(code):
+    if (
+        sep
+        and code.endswith(";")
+        and not ASSIGNMENT_OR_ASSERT.search(code)
+        and not CONTROL_FLOW.search(code)
+    ):
         if EXPECTED_COMMENT.search(comment):
             return "expected result left in inline comment"
 
