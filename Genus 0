@@ -40,6 +40,8 @@ for r in cp_data_new do
     
 end for;
 
+computed_bounds:=AssociativeArray();
+
 keys:=[k: k in Keys(CPgenus0list)];
 level:=[CPgenus0list[k]`N:k in keys];
 ParallelSort(~level,~keys);
@@ -75,8 +77,7 @@ SL2:=SL(2,Integers(CPgenus0list[k]`N));
     if ((CPgenus0list[k]`N) mod 2 eq 0 ) and ((CPgenus0list[k]`N) mod 4 ne 0) then
         b:=2*b;
     end if;
-    k;b;
-    print "...............";
+    computed_bounds[k]:=b;
 end for;   
 
 // Output
@@ -294,6 +295,85 @@ end for;
 32A
 8
 ...............*/
+// Machine-check the formerly printed expected bounds.
+expected_bounds:=AssociativeArray();
+expected_bounds["2A"] := 4;
+expected_bounds["2B"] := 2;
+expected_bounds["2C"] := 4;
+expected_bounds["3B"] := 1;
+expected_bounds["3C"] := 1;
+expected_bounds["3D"] := 3;
+expected_bounds["3A"] := 3;
+expected_bounds["4A"] := 1;
+expected_bounds["4B"] := 2;
+expected_bounds["4D"] := 2;
+expected_bounds["4E"] := 2;
+expected_bounds["4F"] := 2;
+expected_bounds["4G"] := 4;
+expected_bounds["4C"] := 2;
+expected_bounds["5A"] := 1;
+expected_bounds["5B"] := 1;
+expected_bounds["5F"] := 1;
+expected_bounds["5H"] := 5;
+expected_bounds["5D"] := 1;
+expected_bounds["5C"] := 1;
+expected_bounds["5E"] := 1;
+expected_bounds["5G"] := 1;
+expected_bounds["7F"] := 1;
+expected_bounds["7A"] := 1;
+expected_bounds["7C"] := 1;
+expected_bounds["7D"] := 1;
+expected_bounds["7G"] := 1;
+expected_bounds["7B"] := 1;
+expected_bounds["7E"] := 1;
+expected_bounds["8A"] := 2;
+expected_bounds["8L"] := 2;
+expected_bounds["8K"] := 2;
+expected_bounds["8G"] := 4;
+expected_bounds["8H"] := 2;
+expected_bounds["8P"] := 2;
+expected_bounds["8C"] := 2;
+expected_bounds["8M"] := 2;
+expected_bounds["8N"] := 8;
+expected_bounds["8E"] := 2;
+expected_bounds["8D"] := 2;
+expected_bounds["8B"] := 4;
+expected_bounds["8I"] := 2;
+expected_bounds["8O"] := 4;
+expected_bounds["8F"] := 1;
+expected_bounds["8J"] := 2;
+expected_bounds["9A"] := 1;
+expected_bounds["9D"] := 3;
+expected_bounds["9J"] := 3;
+expected_bounds["9I"] := 3;
+expected_bounds["9H"] := 3;
+expected_bounds["9C"] := 3;
+expected_bounds["9G"] := 1;
+expected_bounds["9F"] := 1;
+expected_bounds["9E"] := 1;
+expected_bounds["9B"] := 3;
+expected_bounds["11A"] := 1;
+expected_bounds["13A"] := 1;
+expected_bounds["13B"] := 1;
+expected_bounds["13C"] := 1;
+expected_bounds["16B"] := 8;
+expected_bounds["16G"] := 8;
+expected_bounds["16E"] := 2;
+expected_bounds["16H"] := 2;
+expected_bounds["16C"] := 4;
+expected_bounds["16F"] := 4;
+expected_bounds["16D"] := 2;
+expected_bounds["16A"] := 2;
+expected_bounds["25A"] := 1;
+expected_bounds["25B"] := 5;
+expected_bounds["27A"] := 3;
+expected_bounds["32A"] := 8;
+assert #Keys(computed_bounds) eq #Keys(expected_bounds);
+for k in Keys(expected_bounds) do
+    assert IsDefined(computed_bounds,k);
+    assert computed_bounds[k] eq expected_bounds[k];
+end for;
+
 //*********************************************************************
 //We now produce labels of all genus 0 prime power level modular curves that contain $-I$ and have full determinant using LMFDB data. 
 load "lmfdb_gps_gl2zhat_fine_1213_1923 (1).m";
