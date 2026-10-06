@@ -118,4 +118,4 @@ RationalPoints(H : Bound := 10000);
 
 pt := H!RationalPoints(H : Bound := 10000)[1]; 
 E := EllipticCurve(H,pt);
-Rank(E); //1
+assert Rank(E) eq 1;
