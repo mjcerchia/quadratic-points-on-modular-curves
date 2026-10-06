@@ -15,7 +15,7 @@ mp:=iso<C->C|[2/9*x^12*y*z^2 - 2/9*x^6*y^4*z^5 + 18*x^6*y*z^8 + 2*x^3*y^4*z^8 + 
 -54*x^6*y^4*z^3 + 3*x^3*y^7*z^3 + 972*x^6*y*z^6 - 54*x^3*y^4*z^6 + 45*y^7*z^6 - 972*y^4*z^9 + 2916*y*z^12,
 y^9*z^4 - 36*y^6*z^7 + 324*y^3*z^10]>;
 id:=iso<C->C|[x,y,z],[x,y,z]>;
-mp*mp eq id; //true 
+assert mp*mp eq id; 
 G:=AutomorphismGroup(C,[mp]);
 C1,prj:=CurveQuotient(G);
 
@@ -23,4 +23,4 @@ P<[x]>:=ProjectiveSpace(Rationals(),11);
 //We can't immediately find a point, so we intersect with hyperplanes.
 pt := C1!Points(C1 meet Scheme(AmbientSpace(C1),x[3]))[1];
 E := EllipticCurve(C1,pt);
-Rank(E); // 1
+assert Rank(E) eq 1;

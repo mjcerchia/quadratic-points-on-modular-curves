@@ -38,12 +38,12 @@ end for;
 
 
 
-#EllipticCurve(Curve(Reduction(l[1],3))); //4
-#EllipticCurve(Curve(Reduction(l[3],3))); //2
+assert #EllipticCurve(Curve(Reduction(l[1],3))) eq 4;
+assert #EllipticCurve(Curve(Reduction(l[3],3))) eq 2;
 
 Qx<x> := PolynomialRing(Rationals());
 E := EllipticCurve(x^3+x^2+x+1);
-#EllipticCurve(Curve(Reduction(E,3))); //6
+assert #EllipticCurve(Curve(Reduction(E,3))) eq 6;
 
 /*********************************************************************************************************/
 
@@ -118,4 +118,4 @@ RationalPoints(H : Bound := 10000);
 
 pt := H!RationalPoints(H : Bound := 10000)[1]; 
 E := EllipticCurve(H,pt);
-Rank(E); //1
+assert Rank(E) eq 1;

@@ -35,7 +35,7 @@ end if;
 
 end for;
 
-#l; // 2
+assert #l eq 2;
 
 
 C1 := l[1];
@@ -52,7 +52,7 @@ DefiningEquations(D)} eq {0}
 pt :=   rationalPoints(C1:Bound := 1)[1];
 
 E:=EllipticCurve(C1,pt);
-Rank(E); // 0
+assert Rank(E) eq 0;
 
 C2 := l[2];
   rationalPoints := function(D : Bound := 1)
@@ -68,4 +68,4 @@ DefiningEquations(D)} eq {0}
 pt :=   rationalPoints(C2:Bound := 1)[1];
 
 E:=EllipticCurve(C2,pt);
-Rank(E); //0
+assert Rank(E) eq 0;

@@ -39,18 +39,18 @@ end if;
 
 end for;
 
-#l;
+assert #l eq 3;
 
 
-#EllipticCurve(Curve(l[1])); //8
-#EllipticCurve(Curve(l[2])); //8
-#EllipticCurve(Curve(l[3])); //8
+assert #EllipticCurve(Curve(l[1])) eq 8;
+assert #EllipticCurve(Curve(l[2])) eq 8;
+assert #EllipticCurve(Curve(l[3])) eq 8;
 
 //The rank 1 jacobian factor
 Qx<x> := PolynomialRing(Rationals());
 E := EllipticCurve(x^3+x^2+x+1);
 
-#EllipticCurve(Curve(Reduction(E,7))); //12
+assert #EllipticCurve(Curve(Reduction(E,7))) eq 12;
 
 
 
@@ -139,8 +139,10 @@ f := -(519295955312624653/12493701642312652141017750650696537289523200*x^4  - 18
 g:= P!(- 8012408107/20381746235465097745920*x^2+ 876929837614050/10591640456663*x+ 54345129876457208862888960000/10591640456663);
 H := HyperellipticCurve(f,g);
 SH:=SimplifiedModel(H);
-IsLocallySolvable(SH,2); //has no Q_2 points
-Jacobian(GenusOneModel(H)); // isomorphic to 256.2.a.b
+assert not IsLocallySolvable(SH,2);
+J := Jacobian(GenusOneModel(H));
+Eref := EllipticCurve([0,0,0,-2,0]); // LMFDB isogeny class 256.b, modular form 256.2.a.b
+assert IsIsogenous(J,Eref);
 
 C1:=l[2];
 
@@ -194,8 +196,10 @@ f := -(519295955312624653/12493701642312652141017750650696537289523200*x^4  + 18
 g:= P!(8012408107/20381746235465097745920*x^2+ 876929837614050/10591640456663*x- 54345129876457208862888960000/10591640456663);
 H := HyperellipticCurve(f,g);
 SH:=SimplifiedModel(H);
-IsLocallySolvable(SH,2); //has no Q_2 points
-Jacobian(GenusOneModel(H)); // isomorphic to 256.2.a.b
+assert not IsLocallySolvable(SH,2);
+J := Jacobian(GenusOneModel(H));
+Eref := EllipticCurve([0,0,0,-2,0]); // LMFDB isogeny class 256.b, modular form 256.2.a.b
+assert IsIsogenous(J,Eref);
 
 
 

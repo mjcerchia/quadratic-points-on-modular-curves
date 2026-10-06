@@ -38,14 +38,14 @@ end if;
 
 end for;
 
-#l;//3
+assert #l eq 3;
 
-#EllipticCurve(Curve(Reduction((l[1]),5))); //4
-#EllipticCurve(Curve(Reduction((l[2]),5))); //2
+assert #EllipticCurve(Curve(Reduction((l[1]),5))) eq 4;
+assert #EllipticCurve(Curve(Reduction((l[2]),5))) eq 2;
 
 Qx<x> := PolynomialRing(Rationals());
 E := EllipticCurve(x^3 - 2*x);
-#EllipticCurve(Curve(Reduction(E,5))); //10
+assert #EllipticCurve(Curve(Reduction(E,5))) eq 10;
 
 C1 := l[3];
 //Search for degree 2 divisors on C1
@@ -106,4 +106,4 @@ yv^2 + 65536*x1v^4 + 128*x2v^4
 P<x> := PolynomialRing(Rationals());
 f := -(65536*x^4 + 128);
 H := HyperellipticCurve(f);
-HasPointsEverywhereLocally(f,2); // false
+assert not HasPointsEverywhereLocally(f,2);

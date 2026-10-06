@@ -41,6 +41,8 @@ for r in cp_data_new do
     
 end for;
 
+computed_bounds:=AssociativeArray();
+
 keys:=[k: k in Keys(CPgenus1list)];
 level:=[CPgenus1list[k]`N:k in keys];
 ParallelSort(~level,~keys);
@@ -76,8 +78,7 @@ SL2:=SL(2,Integers(CPgenus1list[k]`N));
     if ((CPgenus1list[k]`N) mod 2 eq 0 ) and ((CPgenus1list[k]`N) mod 4 ne 0) then
         b:=2*b;
     end if;
-    k;b;
-    print "...............";
+    computed_bounds[k]:=b;
 end for;   
 
 /*7C1
@@ -239,9 +240,70 @@ end for;
 49A1
 1
 ...............*/
+// Machine-check the formerly printed expected bounds.
+expected_bounds:=AssociativeArray();
+expected_bounds["7C1"] := 1;
+expected_bounds["7A1"] := 1;
+expected_bounds["7B1"] := 1;
+expected_bounds["8H1"] := 2;
+expected_bounds["8I1"] := 4;
+expected_bounds["8A1"] := 4;
+expected_bounds["8G1"] := 4;
+expected_bounds["8K1"] := 4;
+expected_bounds["8C1"] := 2;
+expected_bounds["8D1"] := 2;
+expected_bounds["8F1"] := 4;
+expected_bounds["8B1"] := 4;
+expected_bounds["8E1"] := 2;
+expected_bounds["8J1"] := 2;
+expected_bounds["9D1"] := 3;
+expected_bounds["9F1"] := 3;
+expected_bounds["9H1"] := 3;
+expected_bounds["9C1"] := 3;
+expected_bounds["9A1"] := 3;
+expected_bounds["9B1"] := 1;
+expected_bounds["9G1"] := 3;
+expected_bounds["9E1"] := 3;
+expected_bounds["11B1"] := 1;
+expected_bounds["11A1"] := 1;
+expected_bounds["11C1"] := 1;
+expected_bounds["11D1"] := 1;
+expected_bounds["16B1"] := 4;
+expected_bounds["16M1"] := 4;
+expected_bounds["16I1"] := 2;
+expected_bounds["16F1"] := 4;
+expected_bounds["16A1"] := 4;
+expected_bounds["16J1"] := 2;
+expected_bounds["16C1"] := 2;
+expected_bounds["16H1"] := 4;
+expected_bounds["16D1"] := 2;
+expected_bounds["16K1"] := 2;
+expected_bounds["16E1"] := 4;
+expected_bounds["16L1"] := 2;
+expected_bounds["16G1"] := 2;
+expected_bounds["17B1"] := 1;
+expected_bounds["17A1"] := 1;
+expected_bounds["17C1"] := 1;
+expected_bounds["19A1"] := 1;
+expected_bounds["19B1"] := 1;
+expected_bounds["27C1"] := 3;
+expected_bounds["27A1"] := 3;
+expected_bounds["27B1"] := 3;
+expected_bounds["32C1"] := 2;
+expected_bounds["32D1"] := 2;
+expected_bounds["32E1"] := 4;
+expected_bounds["32B1"] := 4;
+expected_bounds["32A1"] := 4;
+expected_bounds["49A1"] := 1;
+assert #Keys(computed_bounds) eq #Keys(expected_bounds);
+for k in Keys(expected_bounds) do
+    assert IsDefined(computed_bounds,k);
+    assert computed_bounds[k] eq expected_bounds[k];
+end for;
+
 
 //******************************************************************
-load "Genus 1 data_LMFDB.m"; 
+load "LMFDB Data/Genus 1 data_LMFDB.m"; 
 Genus1LMFDBSubgroup := recformat<label:MonStgElt, gens:SeqEnum, H:GrpMat>;
 Genus1LMFDBlist:=AssociativeArray();
 
@@ -250,7 +312,7 @@ for r in data1 do
      Genus1LMFDBlist[r[1]]:= rec<Genus1LMFDBSubgroup  | label:=r[1], gens:=r[3]>;
 end for;
 
-load "Genus 0 data.m";
+load "LMFDB Data/Genus 0 data_LMFDB.m";
 
 Genus0LMFDBSubgroup := recformat<label:MonStgElt, gens:SeqEnum, H:GrpMat>;
 Genus0LMFDBlist:=AssociativeArray();
@@ -282,6 +344,8 @@ ellipticcurves:=ellipticcurves cat [label];
 end if;
 end for;
 
+// Preserve the computed candidate set before attaching explicit degree-two targets.
+computedGenus1Candidates:={label : label in possdeg2map};
 
 /*Candidates:={"7.42.1.a.1", "7.42.1.b.1", "7.56.1.a.1", "7.56.1.b.1", "7.84.1.a.1", "8.12.1.a.1", "8.12.1.b.1", "8.12.1.c.1", "8.12.1.d.1", "8.24.1.a.1", "8.24.1.b.1", "8.24.1.ba.1", "8.24.1.bb.1",
 "8.24.1.bc.1", "8.24.1.bd.1", "8.24.1.be.1", "8.24.1.bf.1", "8.24.1.c.1", "8.24.1.d.1", "8.24.1.e.1", "8.24.1.f.1", "8.24.1.g.1", "8.24.1.h.1", "8.24.1.i.1", "8.24.1.j.1", "8.24.1.k.1", "8.24.1.l.1",
@@ -521,6 +585,9 @@ possdeg2map:=[<"7.42.1.a.1","7.21.0.a.1">,<"8.24.1.bc.1","8.12.0.u.1">,<"8.24.1.
 <"32.96.1.c.2","32.48.0.e.1">,<"32.96.1.e.2","32.48.0.e.1">,<"32.96.1.g.1","32.48.0.e.1">,<"32.96.1.g.2","32.48.0.e.2">,<"32.96.1.h.2","32.48.0.e.1">];
 
 
+remainingGenus1Candidates:={"8.48.1.bi.1", "9.81.1.a.1", "16.96.1.t.1", "16.48.1.l.1", "16.64.1.a.1", "16.64.1.b.1", "16.96.1.k.1"};
+assert computedGenus1Candidates eq ({tuple[1] : tuple in possdeg2map} join remainingGenus1Candidates);
+
 /* verifying that first entry in possdeg2map is an index 2 subgroup of second entry, hence there is a degree 2 map between them*/
 
 for tuple in possdeg2map do;
@@ -672,7 +739,7 @@ XG:=FindModelOfXG(X);
 C := Curve(ProjectiveSpace(Rationals(), Rank(Parent((XG`psi)[1]))-1),XG`psi);
 c := GenusOneModel(C);
 c2 := DoubleGenusOneModel(c);
-IsLocallySolvable(c2,2); // false
+assert not IsLocallySolvable(c2,2);
 
 //"16.64.1.a.1"
 GL2:=GL(2,Integers(16));
@@ -683,7 +750,7 @@ XG:=FindModelOfXG(X);
 C := Curve(ProjectiveSpace(Rationals(), Rank(Parent((XG`psi)[1]))-1),XG`psi);
 c := GenusOneModel(C);
 c2 := DoubleGenusOneModel(c);
-IsLocallySolvable(c2,2); //false
+assert not IsLocallySolvable(c2,2);
 
 //"16.64.1.b.1"
 GL2:=GL(2,Integers(16));
@@ -694,7 +761,7 @@ XG:=FindModelOfXG(X);
 C := Curve(ProjectiveSpace(Rationals(), Rank(Parent((XG`psi)[1]))-1),XG`psi);
 c := GenusOneModel(C);
 c2 := DoubleGenusOneModel(c);
-IsLocallySolvable(c2,2);//false
+assert not IsLocallySolvable(c2,2);
 
 //"16.96.1.k.1"
 
@@ -706,7 +773,18 @@ XG:=FindModelOfXG(X);
 C := Curve(ProjectiveSpace(Rationals(), Rank(Parent((XG`psi)[1]))-1),XG`psi);
 c := GenusOneModel(C);
 c2 := DoubleGenusOneModel(c);
-IsLocallySolvable(c2,2);//false
+assert not IsLocallySolvable(c2,2);
+
+// The final genus-one classification consists of the elliptic curves found above,
+// the curves with a verified degree-two map to a genus-zero curve, and 16.48.1.l.1.
+genus1InfiniteQuadratic := {label : label in ellipticcurves} join {tuple[1] : tuple in possdeg2map} join {"16.48.1.l.1"};
+assert #genus1InfiniteQuadratic eq 336;
+assert "8.48.1.bi.1" notin genus1InfiniteQuadratic;
+assert "9.81.1.a.1" notin genus1InfiniteQuadratic;
+assert "16.96.1.t.1" notin genus1InfiniteQuadratic;
+assert "16.64.1.a.1" notin genus1InfiniteQuadratic;
+assert "16.64.1.b.1" notin genus1InfiniteQuadratic;
+assert "16.96.1.k.1" notin genus1InfiniteQuadratic;
 
 // 8.48.1.bi.1
 
