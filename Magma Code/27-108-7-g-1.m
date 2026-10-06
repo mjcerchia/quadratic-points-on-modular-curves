@@ -26,22 +26,22 @@ CG,prj := CurveQuotient(AG);
 Genus(CG);
 if Genus(CG) eq 1 then
 
-#Points(CG);
+quotient_counts join:= {#Points(CG)};
 end if;
 
 end if;
 print ".......";
 end for;
 
-//243.2.a.a
-E := EllipticCurve([0, 0, 1, 0, -1]); 
-print "Points of Jacobian factor ";
-#EllipticCurve(Curve(Reduction(E,7))); // Jacobian of Genus 1 quotient must be isogenous to this
-
-//243.2.a.b
-E := EllipticCurve([0, 0, 1, 0, -61]);
-print "Points of Jacobian factor ";
-#EllipticCurve(Curve(Reduction(E,7)));
+// The manuscript claims that the genus-one quotient has Jacobian isogenous
+// to 243.2.a.a rather than 243.2.a.b; modulo 7 these factors have distinct
+// point counts, so we assert the comparison directly.
+E_rank1 := EllipticCurve([0, 0, 1, 0, -1]);   // 243.2.a.a
+E_other := EllipticCurve([0, 0, 1, 0, -61]);  // 243.2.a.b
+n_rank1 := #EllipticCurve(Curve(Reduction(E_rank1,7)));
+n_other := #EllipticCurve(Curve(Reduction(E_other,7)));
+assert n_rank1 ne n_other;
+assert quotient_counts eq {n_rank1};
 
 // We now compute the quotient and check that it has a rational point.
 
@@ -52,7 +52,9 @@ AG:=AutomorphismGroup(C,[phi]);
 CG,prj:=CurveQuotient(AG);
 assert Genus(CG) eq 1;
 P<[x]>:=ProjectiveSpace(Rationals(),11);
-pt := CG!Points(CG meet Scheme(AmbientSpace(CG),x[5]))[1]; // has a point
+pts := Points(CG meet Scheme(AmbientSpace(CG),x[5]));
+assert #pts gt 0;
+pt := CG!pts[1];
 
 // verifying that this has rank 1
 E := EllipticCurve(CG,pt);
