@@ -42,17 +42,20 @@ assert #auts eq #S;
 
 
 
+ranks := [];
 for g in auts do
 if Order(g) eq 2 then
 AG := AutomorphismGroup(C,[g]);
 CG,prj := CurveQuotient(AG);
 if Genus(CG) eq 1 then
 E := EllipticCurve(CG,CG!prj(pt)); 
-Rank(E); // one of these has rank 1
+ranks := Append(ranks, Rank(E));
 end if;
 
 end if;
 
 end for;
+assert #ranks eq 3;
+assert 1 in ranks;
 
 
