@@ -11,14 +11,20 @@ C:=Curve(P,[-x*t + y*z, -2*x*w + x*u + z^2 - w*u, 2*y^2 + z^2 - 2*w*u, 4*w^2 + 2
 
 G:=AutomorphismGroup(C);
 S:=Automorphisms(C);
+genus0quotients:=0;
 for s in S do;
 s1:=G!s;
 if Order(s1) eq 2 then
 AG:=AutomorphismGroup(C,[s1]);
 CG:=CurveQuotient(AG);
 if Genus(CG) eq 0 then
-CG; // pointless
+genus0quotients +:= 1;
+Q,_:=Conic(CG);
+assert not HasRationalPoint(Q);
 end if;
+end if;
+end for;
+assert genus0quotients eq 1;
 **************************************************************************************************************************
 //16.48.3.l.1
 
@@ -27,17 +33,20 @@ C:=Curve(P,[2*x*t + z^2 + w*u, -2*x*w - x*u + y*z, -2*x*t + 2*y^2 + w*u, 4*w^2 +
 
 G:=AutomorphismGroup(C);
 S:=Automorphisms(C);
+genus0quotients:=0;
 for s in S do;
 s1:=G!s;
 if Order(s1) eq 2 then
 AG:=AutomorphismGroup(C,[s1]);
 CG:=CurveQuotient(AG);
 if Genus(CG) eq 0 then
-CG; // pointless
+genus0quotients +:= 1;
+Q,_:=Conic(CG);
+assert not HasRationalPoint(Q);
 end if;
 end if;
-print "........";
 end for;
+assert genus0quotients eq 1;
 **************************************************************************************************************************
 //16.48.3.p.1
 
@@ -46,17 +55,20 @@ C:=Curve(P,[x*u + y*z, -2*x*w - x*t + z^2 + w*t, y^2 + z^2 + 2*w*t, 4*w^2 + t^2 
 
 G:=AutomorphismGroup(C);
 S:=Automorphisms(C);
+genus0quotients:=0;
 for s in S do;
 s1:=G!s;
 if Order(s1) eq 2 then
 AG:=AutomorphismGroup(C,[s1]);
 CG:=CurveQuotient(AG);
 if Genus(CG) eq 0 then
-CG; // pointless
+genus0quotients +:= 1;
+Q,_:=Conic(CG);
+assert not HasRationalPoint(Q);
 end if;
 end if;
-print "........";
 end for;
+assert genus0quotients eq 1;
 
 **************************************************************************************************************************
 
@@ -75,7 +87,9 @@ s2:=iso<C->C|[x,z,y,w,t,-u],[x,z,y,w,t,-u]>;
 phi:=s1*s2;
 AG:=AutomorphismGroup(C,[phi]);
 CG:=CurveQuotient(AG);
-Genus(CG);CG; // pointless
+assert Genus(CG) eq 0;
+Q,_:=Conic(CG);
+assert not HasRationalPoint(Q);
 **************************************************************************************************************************
 //16.48.3.s.1
 
@@ -91,7 +105,9 @@ s1:=iso<C->C|[x,y,z,t/2,2*w,u],[x,y,z,t/2,2*w,u]>;
 
 AG:=AutomorphismGroup(C,[s1]);
 CG:=CurveQuotient(AG);
-Genus(CG);CG; // pointless
+assert Genus(CG) eq 0;
+Q,_:=Conic(CG);
+assert not HasRationalPoint(Q);
 
 **************************************************************************************************************************
 //16.96.3.ex.1
@@ -106,8 +122,8 @@ if Order(s1) eq 2 then
 AG:=AutomorphismGroup(C,[s1]);
 CG:=CurveQuotient(AG);
 if Genus(CG) eq 0 then
-CG;
-HasRationalPoint(CG); // pointless
+Q,_:=Conic(CG);
+assert not HasRationalPoint(Q);
 end if;
 end if;
 print "........";
@@ -126,8 +142,8 @@ if Order(s1) eq 2 then
 AG:=AutomorphismGroup(C,[s1]);
 CG:=CurveQuotient(AG);
 if Genus(CG) eq 0 then
-CG;
-HasRationalPoint(CG); // pointless
+Q,_:=Conic(CG);
+assert not HasRationalPoint(Q);
 end if;
 end if;
 print "........";
