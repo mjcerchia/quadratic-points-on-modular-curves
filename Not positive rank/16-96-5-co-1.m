@@ -40,7 +40,7 @@ end for;
 #l;
 
 
-#EllipticCurve(Curve(l[1])); //8
+assert #EllipticCurve(Curve(l[1])) eq 8;
 
 
 //The rank 1 jacobian factor
