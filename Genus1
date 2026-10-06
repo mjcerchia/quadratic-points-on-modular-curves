@@ -775,6 +775,17 @@ c := GenusOneModel(C);
 c2 := DoubleGenusOneModel(c);
 assert not IsLocallySolvable(c2,2);
 
+// The final genus-one classification consists of the elliptic curves found above,
+// the curves with a verified degree-two map to a genus-zero curve, and 16.48.1.l.1.
+genus1InfiniteQuadratic := {label : label in ellipticcurves} join {tuple[1] : tuple in possdeg2map} join {"16.48.1.l.1"};
+assert #genus1InfiniteQuadratic eq 336;
+assert "8.48.1.bi.1" notin genus1InfiniteQuadratic;
+assert "9.81.1.a.1" notin genus1InfiniteQuadratic;
+assert "16.96.1.t.1" notin genus1InfiniteQuadratic;
+assert "16.64.1.a.1" notin genus1InfiniteQuadratic;
+assert "16.64.1.b.1" notin genus1InfiniteQuadratic;
+assert "16.96.1.k.1" notin genus1InfiniteQuadratic;
+
 // 8.48.1.bi.1
 
 GL2:=GL(2,Integers(8));
