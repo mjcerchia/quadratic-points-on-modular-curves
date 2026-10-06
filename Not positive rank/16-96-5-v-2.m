@@ -34,6 +34,7 @@ assert IsIsomorphic(C,D);
 
 G:=AutomorphismGroup(C);
 S:=Automorphisms(C);
+quotient_point_counts:=[];
 
 for s in S do
 
@@ -49,12 +50,14 @@ if Genus(CG) eq 1 then
 
 Cp:=Curve(Reduction(CG,3));
 E:=EllipticCurve(Cp);
-#Points(E);
+quotient_point_counts:=Append(quotient_point_counts,#Points(E));
 end if;
 
 end if;
 print ".......";
 end for;
+assert #quotient_point_counts eq 1;
+assert quotient_point_counts[1] eq 4;
 
 
 //128.2.a.a
