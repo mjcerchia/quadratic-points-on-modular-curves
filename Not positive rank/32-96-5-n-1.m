@@ -42,12 +42,12 @@ end for;
 #l; //
 
 
-#EllipticCurve(Curve(Reduction(l[1],5))); //4
-#EllipticCurve(Curve(Reduction(l[3],5))); //2
+assert #EllipticCurve(Curve(Reduction(l[1],5))) eq 4;
+assert #EllipticCurve(Curve(Reduction(l[3],5))) eq 2;
 
 Qx<x> := PolynomialRing(Rationals());
 E := EllipticCurve(x^3 - 2*x);
-#EllipticCurve(Curve(Reduction(E,5))); //10
+assert #EllipticCurve(Curve(Reduction(E,5))) eq 10;
 
 
 C1 := l[2];
