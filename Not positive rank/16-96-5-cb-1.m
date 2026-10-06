@@ -40,7 +40,7 @@ end if;
 
 end for;
 
-#l; //3
+assert #l eq 3;
 
 
 assert #EllipticCurve(Curve(l[1])) eq 8;
