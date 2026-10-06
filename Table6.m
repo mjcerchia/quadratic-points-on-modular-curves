@@ -11,6 +11,7 @@ assert #Setseq({t[1] : t in tab6}) eq 140;
 
 load "LMFDB Data/Genus 1 data_LMFDB.m";
 load "LMFDB Data/LMFDB data on genus 2-11.m";
+data211 := data;
 
 Genus1LMFDBSubgroup := recformat<label:MonStgElt, gens:SeqEnum, H:GrpMat>;
 Genus1LMFDBlist:=AssociativeArray();
