@@ -92,7 +92,7 @@ f := -(5/512*x^4 + 11/32*x^3 + 37/8*x^2 + 29*x + 74);
 
 
 H := HyperellipticCurve(f);
-IsLocallySolvable(H,2); // no Q_2 points
+assert not IsLocallySolvable(H,2);
 Jacobian(GenusOneModel(H)); //isomorphic to 256.2.a.a
 
 
@@ -150,5 +150,5 @@ P<x> := PolynomialRing(Rationals());
 f := -(5/512*x^4 - 11/32*x^3 + 37/8*x^2 - 29*x + 74);
 
 H := HyperellipticCurve(f);
-IsLocallySolvable(H,2); // no Q_2 points
+assert not IsLocallySolvable(H,2);
 Jacobian(GenusOneModel(H)); //isomorphic to 256.2.a.a
