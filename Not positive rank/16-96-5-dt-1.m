@@ -7,6 +7,7 @@ p:=5;
 Cp:=Curve(Reduction(C,p));
 G:=AutomorphismGroup(Cp);
 S:=Automorphisms(Cp);
+quotient_point_counts:=[];
 for s in S do;
 s1:=G!s;
 if Order(s1) eq 2 then
@@ -15,15 +16,17 @@ CG:=CurveQuotient(AG);
 if Genus(CG) eq 1 then
 CG;
 E:=EllipticCurve(CG);
-#Points(E); // 6 and 4
+quotient_point_counts:=Append(quotient_point_counts,#Points(E));
 end if;
 end if;
 print "........";
 end for;
+assert #quotient_point_counts eq 2;
+assert {n : n in quotient_point_counts} eq {4,6};
 
 // For 256.2.a.b
 
 E := EllipticCurve([0, 0, 0, -2, 0]);
 Cp:=Curve(Reduction(E,5));
 Ep:=EllipticCurve(Cp);
-#Points(Ep); // 10
+assert #Points(Ep) eq 10;
