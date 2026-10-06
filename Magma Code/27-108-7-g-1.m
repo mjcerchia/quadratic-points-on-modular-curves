@@ -56,4 +56,4 @@ pt := CG!Points(CG meet Scheme(AmbientSpace(CG),x[5]))[1]; // has a point
 
 // verifying that this has rank 1
 E := EllipticCurve(CG,pt);
-Rank(E); // 1
+assert Rank(E) eq 1;
