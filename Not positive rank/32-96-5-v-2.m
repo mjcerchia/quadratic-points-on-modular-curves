@@ -62,7 +62,7 @@ end if;
 
 end for;
 
-#l; //1
+assert #l eq 1;
 
 assert #EllipticCurve(Curve(Reduction((l[1]),7))) eq 8;
 
