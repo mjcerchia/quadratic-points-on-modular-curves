@@ -333,6 +333,54 @@ run_individual_suite() {
   fi
 }
 
+
+static_assertion_audit() {
+  echo
+  echo "=== Static audit for unchecked expected-output comments ==="
+  audit_file="$TMP_RUN_DIR/static-audit.txt"
+  : > "$audit_file"
+
+  {
+    for f in "${TOP_LEVEL_FILES[@]}"; do
+      printf '%s\n' "$ROOT_DIR/$f"
+    done
+    list_individual_files
+  } | while IFS= read -r file; do
+    [[ -f "$file" ]] || continue
+    awk '
+      /^[[:space:]]*\/\// { next }
+      /^[[:space:]]*assert[[:space:]]/ { next }
+
+      /Rank\([^;]*\);[[:space:]]*\/\/[[:space:]]*[0-9]+([[:space:]]|$)/ {
+        print FNR ": " $0; next
+      }
+
+      /(IsConjugate|IsLocallySolvable|HasPointsEverywhereLocally)\([^;]*\);[[:space:]]*\/\/[[:space:]]*(true|false|no|has)/ {
+        print FNR ": " $0; next
+      }
+
+      /#[A-Za-z_][A-Za-z0-9_]*;[[:space:]]*\/\/[[:space:]]*[0-9]+([[:space:]]|$)/ {
+        print FNR ": " $0; next
+      }
+      /#(Points|EllipticCurve)\([^;]*\);[[:space:]]*\/\/[[:space:]]*[0-9]+([[:space:]]|$)/ {
+        print FNR ": " $0; next
+      }
+    ' "$file" | while IFS= read -r hit; do
+      printf '%s:%s\n' "${file#$ROOT_DIR/}" "$hit" >> "$audit_file"
+    done
+  done
+
+  if [[ -s "$audit_file" ]]; then
+    echo "FAIL: found computations whose expected values are still only comments:"
+    sed 's/^/  /' "$audit_file"
+    echo
+    echo "Convert these to Magma assertions before treating the suite as referee-verifiable."
+    exit 1
+  fi
+
+  echo "PASS: no recognized print-only expected-value checks remain."
+}
+
 echo "Quadratic-points-on-modular-curves computational verification"
 echo "Repository: $ROOT_DIR"
 echo "Mode:       $MODE"
@@ -340,6 +388,8 @@ echo "Magma:      $MAGMA_BIN"
 echo "Logs:       $LOG_DIR"
 echo
 echo "Manuscript computation version: Magma V2.29-5"
+
+static_assertion_audit
 
 if [[ "$MODE" == "all" || "$MODE" == "top" ]]; then
   run_top_level_suite
