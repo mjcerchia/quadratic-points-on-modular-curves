@@ -34,7 +34,7 @@ CG,prj := CurveQuotient(AG);
 if Genus(CG) eq 1 then
 
 E:=EllipticCurve(CG,prj(Pt));
-Rank(E);//0 true
+assert Rank(E) eq 0;
 end if;
 
 end if;
