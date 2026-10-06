@@ -60,4 +60,4 @@ end for;
 //128.2.a.a
 E := EllipticCurve([0, 1, 0, -9, 7]);
 print "Points of Jacobian factor ";
-#EllipticCurve(Curve(Reduction(E,3)));
+assert #EllipticCurve(Curve(Reduction(E,3))) eq 6;
