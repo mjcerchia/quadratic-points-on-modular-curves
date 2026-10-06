@@ -139,7 +139,7 @@ f := -(519295955312624653/12493701642312652141017750650696537289523200*x^4  - 18
 g:= P!(- 8012408107/20381746235465097745920*x^2+ 876929837614050/10591640456663*x+ 54345129876457208862888960000/10591640456663);
 H := HyperellipticCurve(f,g);
 SH:=SimplifiedModel(H);
-IsLocallySolvable(SH,2); //has no Q_2 points
+assert not IsLocallySolvable(SH,2);
 Jacobian(GenusOneModel(H)); // isomorphic to 256.2.a.b
 
 C1:=l[2];
@@ -194,7 +194,7 @@ f := -(519295955312624653/12493701642312652141017750650696537289523200*x^4  + 18
 g:= P!(8012408107/20381746235465097745920*x^2+ 876929837614050/10591640456663*x- 54345129876457208862888960000/10591640456663);
 H := HyperellipticCurve(f,g);
 SH:=SimplifiedModel(H);
-IsLocallySolvable(SH,2); //has no Q_2 points
+assert not IsLocallySolvable(SH,2);
 Jacobian(GenusOneModel(H)); // isomorphic to 256.2.a.b
 
 
