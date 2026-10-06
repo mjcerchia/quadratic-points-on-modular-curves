@@ -67,4 +67,4 @@ C1 := l[3];
 pt := C1!Points(C1 meet Scheme(AmbientSpace(C1),x[5]))[1];
 
 E := EllipticCurve(C1,pt);
-Rank(E); //1
+assert Rank(E) eq 1;
