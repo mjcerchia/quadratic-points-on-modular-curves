@@ -38,7 +38,7 @@ end if;
 
 end for;
 
-#l;//1
+assert #l eq 1;
 
 
 #EllipticCurve(Curve(Reduction(l[1],13))); //20
