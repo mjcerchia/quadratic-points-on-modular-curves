@@ -344,6 +344,8 @@ ellipticcurves:=ellipticcurves cat [label];
 end if;
 end for;
 
+// Preserve the computed candidate set before attaching explicit degree-two targets.
+computedGenus1Candidates:={label : label in possdeg2map};
 
 /*Candidates:={"7.42.1.a.1", "7.42.1.b.1", "7.56.1.a.1", "7.56.1.b.1", "7.84.1.a.1", "8.12.1.a.1", "8.12.1.b.1", "8.12.1.c.1", "8.12.1.d.1", "8.24.1.a.1", "8.24.1.b.1", "8.24.1.ba.1", "8.24.1.bb.1",
 "8.24.1.bc.1", "8.24.1.bd.1", "8.24.1.be.1", "8.24.1.bf.1", "8.24.1.c.1", "8.24.1.d.1", "8.24.1.e.1", "8.24.1.f.1", "8.24.1.g.1", "8.24.1.h.1", "8.24.1.i.1", "8.24.1.j.1", "8.24.1.k.1", "8.24.1.l.1",
@@ -582,6 +584,9 @@ possdeg2map:=[<"7.42.1.a.1","7.21.0.a.1">,<"8.24.1.bc.1","8.12.0.u.1">,<"8.24.1.
 <"16.96.1.r.2","16.48.0.y.2">,<"16.96.1.s.1","8.48.0.p.1">,<"16.96.1.s.2","8.48.0.p.1">,<"32.96.1.b.2","16.48.0.v.2">,<"32.96.1.c.1","32.48.0.e.2">,
 <"32.96.1.c.2","32.48.0.e.1">,<"32.96.1.e.2","32.48.0.e.1">,<"32.96.1.g.1","32.48.0.e.1">,<"32.96.1.g.2","32.48.0.e.2">,<"32.96.1.h.2","32.48.0.e.1">];
 
+
+remainingGenus1Candidates:={"8.48.1.bi.1", "9.81.1.a.1", "16.96.1.t.1", "16.48.1.l.1", "16.64.1.a.1", "16.64.1.b.1", "16.96.1.k.1"};
+assert computedGenus1Candidates eq ({tuple[1] : tuple in possdeg2map} join remainingGenus1Candidates);
 
 /* verifying that first entry in possdeg2map is an index 2 subgroup of second entry, hence there is a degree 2 map between them*/
 
