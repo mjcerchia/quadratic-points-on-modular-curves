@@ -35,7 +35,7 @@ end if;
 
 end for;
 
-#l; // 2
+assert #l eq 2;
 
 
 C1 := l[1];
