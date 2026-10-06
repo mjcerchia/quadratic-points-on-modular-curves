@@ -40,7 +40,7 @@ end for;
 #l; //1
 
 
-#EllipticCurve(Curve(l[1]));  //8
+assert #EllipticCurve(Curve(l[1])) eq 8;
 
 //The rank 1 jacobian factor
 Qx<x> := PolynomialRing(Rationals());
