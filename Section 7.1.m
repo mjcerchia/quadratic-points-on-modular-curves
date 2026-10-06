@@ -117,12 +117,13 @@ G:=sub<GL2|gens>;
 H:=G meet SL2;
 assert #quo<Normalizer(SL2,H)|H> eq 32;
 assert #quo<Normalizer(GL2,G)|G> eq 8;
-load "Genus 1 data_LMFDB.m";
+load "LMFDB Data/Genus 1 data_LMFDB.m";
+load "LMFDB Data/LMFDB data on genus 2-11.m";
 
 Genus1LMFDBSubgroup := recformat<label:MonStgElt, gens:SeqEnum, H:GrpMat>;
 Genus1LMFDBlist:=AssociativeArray();
 
-for r in data do
+for r in data1 do
     Genus1LMFDBlist[r[1]]:= rec<Genus1LMFDBSubgroup  | label:=r[1], gens:=r[3]>;
 end for;
 
