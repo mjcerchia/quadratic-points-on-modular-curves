@@ -111,6 +111,18 @@ if [[ "$MODE" == "list" ]]; then
   exit 0
 fi
 
+if ! command -v python3 >/dev/null 2>&1; then
+  echo "ERROR: python3 is required for the static expected-output audit." >&2
+  exit 2
+fi
+
+echo "=== Static expected-output audit ==="
+if ! python3 "$ROOT_DIR/audit_expected_outputs.py"; then
+  echo "ERROR: unchecked/manual expected-output statements remain." >&2
+  exit 1
+fi
+echo
+
 if [[ "$MAGMA_BIN" == */* ]]; then
   [[ -x "$MAGMA_BIN" ]] || {
     echo "ERROR: MAGMA_BIN is not executable: $MAGMA_BIN" >&2
