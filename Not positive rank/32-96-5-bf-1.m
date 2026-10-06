@@ -60,9 +60,7 @@ end if;
 
 end for;
 
-#l; //
-
-
+assert #l eq 3;
 assert #EllipticCurve(Curve(Reduction(l[1],97))) eq 80;
 assert #EllipticCurve(Curve(Reduction(l[3],83))) eq 90;
 
