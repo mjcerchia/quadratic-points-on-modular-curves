@@ -119,6 +119,7 @@ assert #quo<Normalizer(SL2,H)|H> eq 32;
 assert #quo<Normalizer(GL2,G)|G> eq 8;
 load "LMFDB Data/Genus 1 data_LMFDB.m";
 load "LMFDB Data/LMFDB data on genus 2-11.m";
+data211 := data;
 
 Genus1LMFDBSubgroup := recformat<label:MonStgElt, gens:SeqEnum, H:GrpMat>;
 Genus1LMFDBlist:=AssociativeArray();
