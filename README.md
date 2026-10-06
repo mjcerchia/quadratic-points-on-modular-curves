@@ -56,37 +56,37 @@ Where a script's mathematical conclusion is a Boolean or numerical condition, th
 
 Some individual files in `Magma Code/` and `Not positive rank/` use models copied from the frozen LMFDB snapshot; comments in those files explain the relevant argument. Optional model-comparison code may additionally require Zywina's packages and the `data211` dataset.
 
+## One-command referee verification
 
-## One-command fresh-session verification
-
-The branch also contains `verify_all.sh`. It launches each verification in a **separate Magma process**, so one computation cannot accidentally inherit variables from another session.
-
-Before running the core checks, set the external dependency paths, for example:
-
-```bash
-export MODULAR_SPEC="/full/path/to/Modular.spec"
-export CP_DIR="/full/path/to/cummins-pauli"
-export MAGMA_BIN="/full/path/to/magma"   # omit this line if `magma` is already on PATH
-```
-
-Then run:
+The branch contains `verify_all.sh`, a referee-facing master verification script. After Magma and the documented external dependencies are installed, the command
 
 ```bash
 bash verify_all.sh
 ```
 
-This runs the four core scripts and every individual computation file modified in the pre-submission cleanup. Logs are written to a timestamped directory under `verification-logs/`, and the script exits nonzero if any Magma process fails or an assertion/runtime/syntax error appears.
+runs the **complete computational verification suite represented in this repository**:
 
-For a shorter first pass:
+- every top-level classification/level-bound script named above;
+- every `.m` file in `Magma Code/`;
+- every `.m` file in `Not positive rank/`.
 
-```bash
-bash verify_all.sh core
+Each file is launched in a **fresh Magma process**, so a computation cannot accidentally inherit variables from a previous interactive session. The script records a separate log for each computation and a `summary.tsv` file, and it exits nonzero if any Magma process fails or if an assertion, syntax error, runtime error, user error, or internal error is detected.
+
+The conventional dependency layout is
+
+```text
+external/Modular-main/Modular.spec
+external/OpenImage/main/FindOpenImage.m
+external/cummins-pauli/pre.m
+external/cummins-pauli/csg.m
+external/cummins-pauli/csg24.dat
 ```
 
-To run only the individual files whose printed expected outputs were converted to assertions:
+If those packages live elsewhere, set `MODULAR_SPEC`, `OPENIMAGE_FIND`, and `CP_DIR` (or the individual Cummins--Pauli variables) before running the script. Set `MAGMA_BIN` if Magma is not available as `magma` on the shell path.
 
-```bash
-bash verify_all.sh assertions
-```
+For diagnostics, `bash verify_all.sh top` runs only the top-level classification scripts, `bash verify_all.sh files` runs only the individual curve files, and `bash verify_all.sh list` prints the complete verification manifest.
+
+A successful run certifies that all **computational checks encoded by the repository** complete and that every encoded assertion passes. It does not machine-check the purely theoretical arguments in the manuscript.
 
 The expected Magma version for the manuscript is V2.29-5.
+
