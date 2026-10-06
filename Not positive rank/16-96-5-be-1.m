@@ -44,4 +44,4 @@ assert #EllipticCurve(Curve(l[1])) eq 4;
 
 Qx<x> := PolynomialRing(Rationals());
 E := EllipticCurve(x^3+x^2+x+1);
-#EllipticCurve(Curve(Reduction(E,5))); //8
+assert #EllipticCurve(Curve(Reduction(E,5))) eq 8;
