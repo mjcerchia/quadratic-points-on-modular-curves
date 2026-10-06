@@ -35,7 +35,7 @@ end if;
 
 end for;
 
-#l;
+assert #l eq 2;
 
 
 
