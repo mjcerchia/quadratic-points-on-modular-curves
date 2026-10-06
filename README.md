@@ -52,7 +52,7 @@ are among the seven exceptional genus-one cases but are *not* in the final genus
 
 ## Reproducibility notes
 
-Where a script's mathematical conclusion is a Boolean or numerical condition, the verification files use (or should use) Magma `assert` statements rather than requiring the reader to compare printed output with a comment. The LMFDB input snapshots are kept separate from the derived computations so that the provenance of hard-coded curve data is visible and can be compared with future LMFDB releases.
+Where a script's mathematical conclusion is a Boolean or numerical condition, the verification files use Magma `assert` statements rather than requiring the reader to compare printed output with a comment. The static audit covers all 137 verification files (9 top-level scripts, 30 files in `Magma Code/`, and 98 files in `Not positive rank/`). The LMFDB input snapshots are kept separate from the derived computations so that the provenance of hard-coded curve data is visible and can be compared with future LMFDB releases.
 
 Some individual files in `Magma Code/` and `Not positive rank/` use models copied from the frozen LMFDB snapshot; comments in those files explain the relevant argument. Optional model-comparison code may additionally require Zywina's packages and the `data211` dataset.
 
