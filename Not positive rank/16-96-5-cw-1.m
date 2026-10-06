@@ -40,7 +40,7 @@ end for;
 
 #l;//2
 
-#EllipticCurve(Curve(l[1])); //20
+assert #EllipticCurve(Curve(l[1])) eq 20;
 #EllipticCurve(Curve(l[2])); //14
 
 Qx<x> := PolynomialRing(Rationals());
