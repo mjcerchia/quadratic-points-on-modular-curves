@@ -106,4 +106,4 @@ yv^2 + 65536*x1v^4 + 128*x2v^4
 P<x> := PolynomialRing(Rationals());
 f := -(65536*x^4 + 128);
 H := HyperellipticCurve(f);
-HasPointsEverywhereLocally(f,2); // false
+assert not HasPointsEverywhereLocally(f,2);
