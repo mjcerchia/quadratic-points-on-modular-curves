@@ -43,7 +43,7 @@ end for;
 #l; //3
 
 
-#EllipticCurve(Curve(l[1])); //8
+assert #EllipticCurve(Curve(l[1])) eq 8;
 #EllipticCurve(Curve(l[2])); //8
 #EllipticCurve(Curve(l[3])); //8
 
