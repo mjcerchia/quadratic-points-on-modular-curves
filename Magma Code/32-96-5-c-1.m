@@ -105,4 +105,4 @@ g:= P!-2;
 H := HyperellipticCurve(f,g);
 
 E := EllipticCurve(H);
-Rank(E); //1
+assert Rank(E) eq 1;
