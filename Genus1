@@ -241,7 +241,7 @@ end for;
 ...............*/
 
 //******************************************************************
-load "Genus 1 data_LMFDB.m"; 
+load "LMFDB Data/Genus 1 data_LMFDB.m"; 
 Genus1LMFDBSubgroup := recformat<label:MonStgElt, gens:SeqEnum, H:GrpMat>;
 Genus1LMFDBlist:=AssociativeArray();
 
@@ -250,7 +250,7 @@ for r in data1 do
      Genus1LMFDBlist[r[1]]:= rec<Genus1LMFDBSubgroup  | label:=r[1], gens:=r[3]>;
 end for;
 
-load "Genus 0 data.m";
+load "LMFDB Data/Genus 0 data_LMFDB.m";
 
 Genus0LMFDBSubgroup := recformat<label:MonStgElt, gens:SeqEnum, H:GrpMat>;
 Genus0LMFDBlist:=AssociativeArray();
@@ -672,7 +672,7 @@ XG:=FindModelOfXG(X);
 C := Curve(ProjectiveSpace(Rationals(), Rank(Parent((XG`psi)[1]))-1),XG`psi);
 c := GenusOneModel(C);
 c2 := DoubleGenusOneModel(c);
-IsLocallySolvable(c2,2); // false
+assert not IsLocallySolvable(c2,2);
 
 //"16.64.1.a.1"
 GL2:=GL(2,Integers(16));
@@ -683,7 +683,7 @@ XG:=FindModelOfXG(X);
 C := Curve(ProjectiveSpace(Rationals(), Rank(Parent((XG`psi)[1]))-1),XG`psi);
 c := GenusOneModel(C);
 c2 := DoubleGenusOneModel(c);
-IsLocallySolvable(c2,2); //false
+assert not IsLocallySolvable(c2,2);
 
 //"16.64.1.b.1"
 GL2:=GL(2,Integers(16));
@@ -694,7 +694,7 @@ XG:=FindModelOfXG(X);
 C := Curve(ProjectiveSpace(Rationals(), Rank(Parent((XG`psi)[1]))-1),XG`psi);
 c := GenusOneModel(C);
 c2 := DoubleGenusOneModel(c);
-IsLocallySolvable(c2,2);//false
+assert not IsLocallySolvable(c2,2);
 
 //"16.96.1.k.1"
 
@@ -706,7 +706,7 @@ XG:=FindModelOfXG(X);
 C := Curve(ProjectiveSpace(Rationals(), Rank(Parent((XG`psi)[1]))-1),XG`psi);
 c := GenusOneModel(C);
 c2 := DoubleGenusOneModel(c);
-IsLocallySolvable(c2,2);//false
+assert not IsLocallySolvable(c2,2);
 
 // 8.48.1.bi.1
 
