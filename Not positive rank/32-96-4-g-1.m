@@ -35,4 +35,4 @@ end if;
 
 end for;
 
-l; //empty
+assert #l eq 0 and #m eq 0;
