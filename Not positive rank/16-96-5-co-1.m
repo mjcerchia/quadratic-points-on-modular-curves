@@ -37,7 +37,7 @@ end if;
 
 end for;
 
-#l;
+assert #l eq 1;
 
 
 assert #EllipticCurve(Curve(l[1])) eq 8;
