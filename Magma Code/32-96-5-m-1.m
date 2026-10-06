@@ -37,11 +37,15 @@ end if;
 end for;
 
 
+assert #l eq 3;
+
 P<[x]> := ProjectiveSpace(Rationals(),7);
 C1 := l[3];
 
 //We can't immediately find a point, so we intersect with a hyperplane
 //This produces a point
-pt := Points(C1 meet Scheme(AmbientSpace(C1),x[1]))[1];
+pts := Points(C1 meet Scheme(AmbientSpace(C1),x[1]));
+assert #pts gt 0;
+pt := pts[1];
 E := EllipticCurve(C1,pt);
-Rank(E); //1
+assert Rank(E) eq 1;
