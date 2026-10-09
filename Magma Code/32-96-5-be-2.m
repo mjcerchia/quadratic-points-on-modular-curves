@@ -19,7 +19,7 @@ for tuple in data211 do;
                       GL2:=GL(2,Integers(level));
                       G:=sub<GL2|tuple[4]>;
                       Gt:=sub<GL2|[Transpose(GL2!g):g in Generators(G)]>;
-                      IsConjugate(GL2,G,Gt);//false
+                      assert not IsConjugate(GL2,G,Gt);
                       X:=CreateModularCurveRec(Gt);
                       XG:=FindModelOfXG(X);
                       D := Curve(ProjectiveSpace(Rationals(), Rank(Parent((XG`psi)[1]))-1),XG`psi);
@@ -67,4 +67,4 @@ C1 := l[3];
 pt := C1!Points(C1 meet Scheme(AmbientSpace(C1),x[5]))[1];
 
 E := EllipticCurve(C1,pt);
-Rank(E); //1
+assert Rank(E) eq 1;

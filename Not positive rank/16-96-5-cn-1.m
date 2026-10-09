@@ -37,13 +37,13 @@ end if;
 
 end for;
 
-#l;//1
+assert #l eq 1;
 
-#EllipticCurve(Curve(l[1])); //8
+assert #EllipticCurve(Curve(l[1])) eq 8;
 
 
 //The rank 1 jacobian factor
 Qx<x> := PolynomialRing(Rationals());
 E := EllipticCurve(x^3+x^2+x+1);
 
-#EllipticCurve(Curve(Reduction(E,7))); //12
+assert #EllipticCurve(Curve(Reduction(E,7))) eq 12;

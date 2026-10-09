@@ -42,4 +42,4 @@ C1 := l[2];
 //We can't immediately find a point, so we intersect with a hyperplane
 pt := C1!Points(C1 meet Scheme(AmbientSpace(C1),x[2]))[1];
 E := EllipticCurve(C1,pt);
-Rank(E); //1
+assert Rank(E) eq 1;

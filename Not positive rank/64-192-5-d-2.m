@@ -32,8 +32,7 @@ AG := AutomorphismGroup(C,[g]);
 CG,prj := CurveQuotient(AG);
 if Genus(CG) eq 1 then
 E:=EllipticCurve(CG,prj(Pt));
-Rank(E);
-end if;
+assert Rank(E) eq 0;end if;
 
 end if;
 

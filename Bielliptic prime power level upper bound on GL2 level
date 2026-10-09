@@ -120,6 +120,8 @@ end for;
 
 
 
+computed_bounds:=AssociativeArray();
+
 keys:=[k: k in Keys(CPbiellipticlist)];
 level:=[CPbiellipticlist[k]`N:k in keys];
 ParallelSort(~level,~keys);
@@ -155,8 +157,7 @@ SL2:=SL(2,Integers(CPbiellipticlist[k]`N));
     if ((CPbiellipticlist[k]`N) mod 2 eq 0 ) and ((CPbiellipticlist[k]`N) mod 4 ne 0) then
         b:=2*b;
     end if;
-    k;b;
-    print "...............";
+    computed_bounds[k]:=b;
 end for;  
 
 
@@ -455,7 +456,113 @@ end for;
 ...............
 131A11
 1
-............... */ // Upper bound is N*b
+............... */
+// Machine-check the formerly printed expected bounds.
+expected_bounds:=AssociativeArray();
+expected_bounds["7A3"] := 7;
+expected_bounds["8A3"] := 8;
+expected_bounds["8A5"] := 8;
+expected_bounds["9C4"] := 3;
+expected_bounds["9B4"] := 3;
+expected_bounds["9A4"] := 3;
+expected_bounds["11A4"] := 1;
+expected_bounds["11A5"] := 1;
+expected_bounds["11A3"] := 1;
+expected_bounds["16A4"] := 2;
+expected_bounds["16I5"] := 4;
+expected_bounds["16E5"] := 4;
+expected_bounds["16A5"] := 8;
+expected_bounds["16P3"] := 4;
+expected_bounds["16K3"] := 4;
+expected_bounds["16C5"] := 4;
+expected_bounds["16E9"] := 8;
+expected_bounds["16O5"] := 4;
+expected_bounds["16H3"] := 8;
+expected_bounds["16N3"] := 4;
+expected_bounds["16L3"] := 4;
+expected_bounds["16Q3"] := 2;
+expected_bounds["16C4"] := 2;
+expected_bounds["16B5"] := 8;
+expected_bounds["16O3"] := 4;
+expected_bounds["16G3"] := 2;
+expected_bounds["16H5"] := 2;
+expected_bounds["16N5"] := 4;
+expected_bounds["16J5"] := 2;
+expected_bounds["16R3"] := 4;
+expected_bounds["16D5"] := 4;
+expected_bounds["16A3"] := 8;
+expected_bounds["16M5"] := 8;
+expected_bounds["16K5"] := 4;
+expected_bounds["16F5"] := 4;
+expected_bounds["16B4"] := 2;
+expected_bounds["17A5"] := 1;
+expected_bounds["27D4"] := 3;
+expected_bounds["27D7"] := 3;
+expected_bounds["27B4"] := 3;
+expected_bounds["27A4"] := 3;
+expected_bounds["27A3"] := 3;
+expected_bounds["27E7"] := 3;
+expected_bounds["27C4"] := 3;
+expected_bounds["29A4"] := 1;
+expected_bounds["32E9"] := 8;
+expected_bounds["32N5"] := 4;
+expected_bounds["32O3"] := 4;
+expected_bounds["32N3"] := 4;
+expected_bounds["32G7"] := 4;
+expected_bounds["32A3"] := 8;
+expected_bounds["32D5"] := 4;
+expected_bounds["32I5"] := 4;
+expected_bounds["32E5"] := 8;
+expected_bounds["32J3"] := 8;
+expected_bounds["32P3"] := 4;
+expected_bounds["32A4"] := 2;
+expected_bounds["32E3"] := 2;
+expected_bounds["32A5"] := 8;
+expected_bounds["32F5"] := 8;
+expected_bounds["32K5"] := 2;
+expected_bounds["32H7"] := 4;
+expected_bounds["32J5"] := 2;
+expected_bounds["32K7"] := 2;
+expected_bounds["32I3"] := 2;
+expected_bounds["32Q3"] := 2;
+expected_bounds["32A7"] := 8;
+expected_bounds["32B5"] := 8;
+expected_bounds["32C5"] := 4;
+expected_bounds["32L3"] := 8;
+expected_bounds["32G3"] := 2;
+expected_bounds["32O5"] := 4;
+expected_bounds["32H5"] := 2;
+expected_bounds["32L5"] := 4;
+expected_bounds["32F3"] := 2;
+expected_bounds["32G5"] := 4;
+expected_bounds["32M5"] := 8;
+expected_bounds["32C4"] := 2;
+expected_bounds["37B4"] := 1;
+expected_bounds["41A5"] := 1;
+expected_bounds["43A3"] := 1;
+expected_bounds["49A3"] := 7;
+expected_bounds["53A4"] := 1;
+expected_bounds["61A4"] := 1;
+expected_bounds["64A9"] := 8;
+expected_bounds["64F7"] := 4;
+expected_bounds["64D5"] := 4;
+expected_bounds["64B3"] := 8;
+expected_bounds["64B5"] := 8;
+expected_bounds["64C5"] := 8;
+expected_bounds["64A5"] := 8;
+expected_bounds["79A6"] := 1;
+expected_bounds["81A4"] := 3;
+expected_bounds["81A7"] := 3;
+expected_bounds["83A7"] := 1;
+expected_bounds["89A7"] := 1;
+expected_bounds["101A8"] := 1;
+expected_bounds["131A11"] := 1;
+assert #Keys(computed_bounds) eq #Keys(expected_bounds);
+for k in Keys(expected_bounds) do
+    assert IsDefined(computed_bounds,k);
+    assert computed_bounds[k] eq expected_bounds[k];
+end for;
+ // Upper bound is N*b
 
 // The following functions are taken from https://math.mit.edu/~drew/SZ16/g0groups.m with minor modifications.
 

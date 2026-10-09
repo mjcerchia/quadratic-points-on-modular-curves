@@ -74,4 +74,4 @@ coeffs := [ 0, 1 ];
 
     pt := Points(Scheme(AmbientSpace(C1),ideals[1]))[1];
     E := EllipticCurve(C1,C1!pt);
-    Rank(E); //1
+    assert Rank(E) eq 1;

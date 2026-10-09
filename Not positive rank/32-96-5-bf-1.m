@@ -19,7 +19,7 @@ for tuple in data211 do;
                       GL2:=GL(2,Integers(level));
                       G:=sub<GL2|tuple[4]>;
                       Gt:=sub<GL2|[Transpose(GL2!g):g in Generators(G)]>;
-                      IsConjugate(GL2,G,Gt);//false
+                      assert not IsConjugate(GL2,G,Gt);
                       X:=CreateModularCurveRec(Gt);
                       XG:=FindModelOfXG(X);
                       D := Curve(ProjectiveSpace(Rationals(), Rank(Parent((XG`psi)[1]))-1),XG`psi);
@@ -60,16 +60,14 @@ end if;
 
 end for;
 
-#l; //
-
-
-#EllipticCurve(Curve(Reduction(l[1],97))); //80
-#EllipticCurve(Curve(Reduction(l[3],83))); //90
+assert #l eq 3;
+assert #EllipticCurve(Curve(Reduction(l[1],97))) eq 80;
+assert #EllipticCurve(Curve(Reduction(l[3],83))) eq 90;
 
 Qx<x> := PolynomialRing(Rationals());
 E := EllipticCurve(x^3+x^2+x+1);
-#EllipticCurve(Curve(Reduction(E,83))); //78
-#EllipticCurve(Curve(Reduction(E,97))); //100
+assert #EllipticCurve(Curve(Reduction(E,83))) eq 78;
+assert #EllipticCurve(Curve(Reduction(E,97))) eq 100;
 
 C1 := l[2];
 
@@ -133,5 +131,5 @@ P<x> := PolynomialRing(Rationals());
 f := -(4096*x^4+128*x^2+6);
 g:=P!-4;
 H := HyperellipticCurve(f,g);
-HasPointsEverywhereLocally(f,2); // false
+assert not HasPointsEverywhereLocally(f,2);
 

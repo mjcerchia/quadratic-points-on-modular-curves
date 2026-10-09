@@ -22,8 +22,8 @@ x[1]*x[5] - 2*x[1]*x[6] + x[2]*x[3] + x[2]*x[5] + x[2]*x[6],
 ]);
 
 G:= AutomorphismGroup(C); 
-#G; // 2
+assert #G eq 2;
 Pts:=PointSearch(C,10000);
 CG,prj:=CurveQuotient(G);
 E:=EllipticCurve(CG,prj(Pts[1]));
-Rank(E); //1 
+assert Rank(E) eq 1; 

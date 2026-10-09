@@ -35,7 +35,7 @@ end if;
 
 end for;
 
-#l; //2
+assert #l eq 2;
 C1:=l[1];
 
 //constructing a simple model for C1
@@ -92,8 +92,10 @@ f := -(5/512*x^4 + 11/32*x^3 + 37/8*x^2 + 29*x + 74);
 
 
 H := HyperellipticCurve(f);
-IsLocallySolvable(H,2); // no Q_2 points
-Jacobian(GenusOneModel(H)); //isomorphic to 256.2.a.a
+assert not IsLocallySolvable(H,2);
+J := Jacobian(GenusOneModel(H));
+Eref := EllipticCurve([0,1,0,-13,-21]); // LMFDB isogeny class 256.a, modular form 256.2.a.a
+assert IsIsogenous(J,Eref);
 
 
 C1:=l[2];
@@ -150,5 +152,7 @@ P<x> := PolynomialRing(Rationals());
 f := -(5/512*x^4 - 11/32*x^3 + 37/8*x^2 - 29*x + 74);
 
 H := HyperellipticCurve(f);
-IsLocallySolvable(H,2); // no Q_2 points
-Jacobian(GenusOneModel(H)); //isomorphic to 256.2.a.a
+assert not IsLocallySolvable(H,2);
+J := Jacobian(GenusOneModel(H));
+Eref := EllipticCurve([0,1,0,-13,-21]); // LMFDB isogeny class 256.a, modular form 256.2.a.a
+assert IsIsogenous(J,Eref);
