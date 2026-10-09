@@ -227,6 +227,12 @@ prepare_top_level() {
   cpdata="$TMP_RUN_DIR/$(safe_name "$source_file")_CPdata.dat"
 
   while IFS= read -r line || [[ -n "$line" ]]; do
+    # Several legacy top-level files use bare rows of asterisks as visual separators.
+    # They are not Magma statements, so comment them in the temporary runnable copy.
+    if [[ "$line" =~ ^\\*+$ ]]; then
+      printf '//%s\\n' "$line"
+      continue
+    fi
     case "$line" in
       'load ".../pre.m";'*)
         printf 'load "%s";\n' "$CP_PRE"
