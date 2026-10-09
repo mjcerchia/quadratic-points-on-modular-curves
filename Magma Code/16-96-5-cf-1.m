@@ -17,15 +17,17 @@ end for;
 assert #auts eq #S;
 
 
+ranks := [];
 for g in auts do
 if Order(g) eq 2 then
 AG := AutomorphismGroup(C,[g]);
 CG,prj := CurveQuotient(AG);
 if Genus(CG) eq 1 then
 E:=EllipticCurve(CG,prj(Pt));
-Rank(E); // two have rank 1
+ranks := Append(ranks, Rank(E));
 end if;
 
 end if;
 print "........";
 end for;
+assert #[r : r in ranks | r eq 1] eq 2;
