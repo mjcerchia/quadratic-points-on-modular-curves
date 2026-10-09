@@ -18,7 +18,7 @@ for tuple in data211 do;
                       GL2:=GL(2,Integers(level));
                       G:=sub<GL2|tuple[4]>;
                       Gt:=sub<GL2|[Transpose(GL2!g):g in Generators(G)]>;
-                      IsConjugate(GL2,G,Gt);//false
+                      assert not IsConjugate(GL2,G,Gt);
                       X:=CreateModularCurveRec(Gt);
                       XG:=FindModelOfXG(X);
                       D := Curve(ProjectiveSpace(Rationals(), Rank(Parent((XG`psi)[1]))-1),XG`psi);
@@ -42,17 +42,20 @@ assert #auts eq #S;
 
 
 
+ranks := [];
 for g in auts do
 if Order(g) eq 2 then
 AG := AutomorphismGroup(C,[g]);
 CG,prj := CurveQuotient(AG);
 if Genus(CG) eq 1 then
 E := EllipticCurve(CG,CG!prj(pt)); 
-Rank(E); // one of these has rank 1
+ranks := Append(ranks, Rank(E));
 end if;
 
 end if;
 
 end for;
+assert #ranks eq 3;
+assert 1 in ranks;
 
 
