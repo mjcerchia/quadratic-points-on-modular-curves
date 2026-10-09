@@ -108,7 +108,7 @@ if StringToInteger(g) ne 1 and tuple[2] notin gonality2 and tuple[2] in biellipt
 SetbiellipticCand:=SetbiellipticCand cat [tuple];
 end if;
 end for;
-#SetbiellipticCand; //843
+assert #SetbiellipticCand eq 843;
 
 biellipticCand:=AssociativeArray();
 for label in bielliptic_list do;
