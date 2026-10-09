@@ -38,14 +38,14 @@ end if;
 
 end for;
 
-#l;//3
+assert #l eq 3;
 
 
-#EllipticCurve(Curve(Reduction((l[1]),7))); //8
-#EllipticCurve(Curve(Reduction((l[2]),5))); //4
-#EllipticCurve(Curve(Reduction((l[3]),7))); //4
+assert #EllipticCurve(Curve(Reduction((l[1]),7))) eq 8;
+assert #EllipticCurve(Curve(Reduction((l[2]),5))) eq 4;
+assert #EllipticCurve(Curve(Reduction((l[3]),7))) eq 4;
 
 Qx<x> := PolynomialRing(Rationals());
 E := EllipticCurve(x^3+x^2+x+1);
-#EllipticCurve(Curve(Reduction(E,7))); //12
-#EllipticCurve(Curve(Reduction(E,5))); //8
+assert #EllipticCurve(Curve(Reduction(E,7))) eq 12;
+assert #EllipticCurve(Curve(Reduction(E,5))) eq 8;
