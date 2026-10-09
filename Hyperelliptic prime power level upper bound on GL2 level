@@ -573,13 +573,13 @@ H:=CPgenus3list["64A3"]`H;
 red:=hom<SL(2,Integers(N))->SL(2,Integers(64))|[SL(2,Integers(64))!SL(2,Integers(N)).i:i in [1..#Generators(SL(2,Integers(N)))]]>;
 Hred:=H@@red;
 BaseRing(Hred);
-gl2QImagesFromSL2(Hred); // empty so no groups of level 512
+assert #gl2QImagesFromSL2(Hred) eq 0; // no groups of level 512
 
 N:=512;
 H:=CPgenus7list["64D7"]`H;
 red:=hom<SL(2,Integers(N))->SL(2,Integers(64))|[SL(2,Integers(64))!SL(2,Integers(N)).i:i in [1..#Generators(SL(2,Integers(N)))]]>;
 Hred:=H@@red;
 BaseRing(Hred);
-gl2QImagesFromSL2(Hred); // empty so no groups of level 512
+assert #gl2QImagesFromSL2(Hred) eq 0; // no groups of level 512
 
 
