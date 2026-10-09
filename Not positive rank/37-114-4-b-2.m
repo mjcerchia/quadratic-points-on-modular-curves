@@ -43,9 +43,9 @@ end if;
 
 end for;
 
-#l; //1
+assert #l eq 1;
 
 assert #EllipticCurve(Curve(l[1])) eq 6;
 
 E := EllipticCurve([0,0,1,-1,0]);
-#EllipticCurve(Curve(Reduction(E,5))); //8
+assert #EllipticCurve(Curve(Reduction(E,5))) eq 8;
