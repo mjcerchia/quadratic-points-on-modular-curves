@@ -305,5 +305,5 @@ if g eq "0" then
 genus0:=genus0 cat [label];
 end if;
 end for;
-#genus0; //265
+assert #genus0 eq 265;
 
