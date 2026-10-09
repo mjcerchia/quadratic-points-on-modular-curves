@@ -18,7 +18,7 @@ for tuple in data211 do;
                       GL2:=GL(2,Integers(level));
                       G:=sub<GL2|tuple[4]>;
                       Gt:=sub<GL2|[Transpose(GL2!g):g in Generators(G)]>;
-                      IsConjugate(GL2,G,Gt);//false
+                      assert not IsConjugate(GL2,G,Gt);
                       X:=CreateModularCurveRec(Gt);
                       XG:=FindModelOfXG(X);
                       D := Curve(ProjectiveSpace(Rationals(), Rank(Parent((XG`psi)[1]))-1),XG`psi);
@@ -34,6 +34,7 @@ assert IsIsomorphic(C,D);
 
 G:=AutomorphismGroup(C);
 S:=Automorphisms(C);
+quotient_point_counts:=[];
 
 for s in S do
 
@@ -49,15 +50,17 @@ if Genus(CG) eq 1 then
 
 Cp:=Curve(Reduction(CG,3));
 E:=EllipticCurve(Cp);
-#Points(E);
+quotient_point_counts:=Append(quotient_point_counts,#Points(E));
 end if;
 
 end if;
 print ".......";
 end for;
+assert #quotient_point_counts eq 1;
+assert quotient_point_counts[1] eq 4;
 
 
 //128.2.a.a
 E := EllipticCurve([0, 1, 0, -9, 7]);
 print "Points of Jacobian factor ";
-#EllipticCurve(Curve(Reduction(E,3)));
+assert #EllipticCurve(Curve(Reduction(E,3))) eq 6;
